@@ -1,5 +1,4 @@
-import 'dotenv/config';
-import mongoose, { Document, Model, Schema } from "mongoose";
+import mongoose, { type Document, type Model, type Schema } from "mongoose"
 import bcrypt from "bcryptjs"
 import jwt from "jsonwebtoken"
 
@@ -7,66 +6,63 @@ const emailRegexPattern: RegExp = /^[^\s@]+@[^\s@]+\.[^\s@]+$/
 
 export interface IUser extends Document {
   _id: string
-  name: string,
-  email: string,
-  password: string,
+  name: string
+  email: string
+  password: string
   avatar: {
-    public_id: string,
+    public_id: string
     url: string
-  },
-  role: string,
-  isVerified: boolean,
-  // courses: Array<{ courseId: string }>,
-  courses: mongoose.Types.ObjectId[],
-  comparePassword: (password: string) => Promise<boolean>,
-  SignAccessToken: () => string,
-  SignRefreshToken: () => string,
-
+  }
+  role: string
+  isVerified: boolean
+  courses: mongoose.Types.ObjectId[]
+  comparePassword: (password: string) => Promise<boolean>
+  SignAccessToken: () => string
+  SignRefreshToken: () => string
 }
 
-const userSchema: Schema<IUser> = new mongoose.Schema({
-  name: {
-    type: String,
-    required: [true, "Digite seu nome..."]
-  },
-  email: {
-    type: String,
-    required: [true, "Digite seu email..."],
-    validate: {
-      validator: function (value: string) {
-        return emailRegexPattern.test(value)
-      },
-      message: "Por favor entre com um email válido."
+const userSchema: Schema<IUser> = new mongoose.Schema(
+  {
+    name: {
+      type: String,
+      required: [true, "Digite seu nome..."],
     },
-    unique: true
+    email: {
+      type: String,
+      required: [true, "Digite seu email..."],
+      validate: {
+        validator: (value: string) => emailRegexPattern.test(value),
+        message: "Por favor entre com um email válido.",
+      },
+      unique: true,
+    },
+    password: {
+      type: String,
+      minlength: [6, "A senha deve ter pelo menos 6 caracteres"],
+      select: false,
+    },
+    avatar: {
+      public_id: String,
+      url: String,
+    },
+    role: {
+      type: String,
+      default: "user",
+    },
+    isVerified: {
+      type: Boolean,
+      default: false,
+    },
+    courses: [
+      {
+        courseId: String,
+      },
+    ],
   },
-  password: {
-    type: String,
-    // required: [true, "Digite sua senha..."],
-    minlength: [6, "A senha deve ter pelo menos 6 caracteres"],
-    select: false
+  {
+    timestamps: true,
   },
-  avatar: {
-    public_id: String,
-    url: String
-  },
-  role: {
-    type: String,
-    default: "Usuário"
-  },
-  isVerified: {
-    type: Boolean,
-    default: false
-  },
-  courses: [
-    {
-      courseId: String,
-    }
-  ],
-}, {
-  timestamps: true
-})
-
+)
 
 // Hash Password before saving
 userSchema.pre<IUser>("save", async function (next) {
@@ -77,27 +73,16 @@ userSchema.pre<IUser>("save", async function (next) {
 
 // Sign access token
 userSchema.methods.SignAccessToken = function () {
-  return jwt.sign(
-    {
-      id: this._id
-    },
-    process.env.ACCESS_TOKEN || "",
-    {
-      expiresIn: "5m",
-    }
-  )
+  return jwt.sign({ id: this._id }, process.env.ACCESS_TOKEN || "", {
+    expiresIn: "5m",
+  })
 }
 
 // Sign refresh token
 userSchema.methods.SignRefreshToken = function () {
-  return jwt.sign({
-    id: this._id
-  },
-    process.env.REFRESH_TOKEN || "",
-    {
-      expiresIn: "3d"
-    }
-  )
+  return jwt.sign({ id: this._id }, process.env.REFRESH_TOKEN || "", {
+    expiresIn: "3d",
+  })
 }
 
 // Compare password

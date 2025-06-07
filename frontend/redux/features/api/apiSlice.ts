@@ -3,13 +3,24 @@ import { createApi, fetchBaseQuery } from "@reduxjs/toolkit/query/react"
 export const apiSlice = createApi({
   reducerPath: "api",
   baseQuery: fetchBaseQuery({
-    baseUrl: process.env.NEXT_PUBLIC_SERVER_URI || 'http://localhost:8000/api/v1',
+    baseUrl: process.env.NEXT_PUBLIC_SERVER_URI,
   }),
   endpoints: (builder) => ({
+    refreshToken: builder.query({
+      query: (data) => ({
+        url: "refresh",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
     loadUser: builder.query({
-      query: () => "/profile"
-    })
-  })
+      query: (data) => ({
+        url: "me",
+        method: "GET",
+        credentials: "include" as const,
+      }),
+    }),
+  }),
 })
 
-export const { useLoadUserQuery } = apiSlice
+export const { useRefreshTokenQuery, useLoadUserQuery } = apiSlice
