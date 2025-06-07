@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html lang="pt-br">
+  <head>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Notificação de nova resposta</title>
+    <style>
+      body{
+        margin: 0;
+        padding: 0;
+        min-width: 100%;
+        font-family: Arial, Helvetica, sans-serif;
+        font-size: 16px;
+        line-height: 1.5;
+        background-color: #FAFAFA;
+        color: #1b1b1b;
+      }
+      h1{
+        font-size: 24px;
+        font-weight: 700;
+        line-height: 1.25;
+        margin-top: 0;
+        margin-bottom: 15px;
+        text-align: center;
+      }
+      p{
+        margin-top: 0;
+        margin-bottom: 24px;
+      }
+      table td{
+        vertical-align: top;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Olá <%= name %>,</h1>
+    <p>Uma nova resposta foi adicionada à sua pergunta no vídeo "<%= title %>".</p>
+    <p>Por favor, faça login em nosso site para visualizar a resposta e continuar a discussão.</p>
+    <p>Obrigado por fazer parte da nossa comunidade!</p>
+  </body>
+</html>

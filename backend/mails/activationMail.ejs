@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Document</title>
+  <style>
+    body{
+      margin: 0;
+      padding: 0;
+      min-width: 100%;
+      font-family: Arial, Helvetica, sans-serif;
+      font-size: 16px;
+      line-height: 1.5;
+      background-color: #FAFAFA;
+      color: #1b1b1b;
+    }
+    a{
+      color: #333;
+      text-decoration: none;
+    }
+    h1{
+      font-size: 24px;
+      font-weight: 700;
+      line-height: 1.25;
+      margin-top: 0;
+      margin-bottom: 15px;
+      text-align: center;
+    }
+    p{
+      margin-top: 0;
+      margin-bottom: 24px;
+    }
+    table td{
+      vertical-align: top;
+    }
+    .email-wrapper{
+      max-width: 600px;
+      margin: 0 auto;
+    }
+    .email-header{
+      background-color: #7D41E1;
+      padding: 24px;
+      color: #FFF;
+    }
+    .email-body{
+      padding: 24px;
+      background-color: #FFF;
+    }
+    .email-footer{
+      background-color: #F6F6F6;
+      padding: 24px;
+    }
+    .button{
+      display: inline-block;
+      background-color: #7D41E1;
+      color: #FFF;
+      font-size: 16px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      padding: 12px 24px;
+      border-radius: 4px;
+    }
+  </style>
+</head>
+<body>
+  <div class="email-wrapper">
+    <div class="email-header">
+      <h1>Bem vindo a Academia Pensamento Computacional</h1>
+    </div>
+    <div class="email-body">
+      <p>Olá <%= user.name %>,</p>
+      <p>Obrigado por se juntar a nossa iniciativa 🚀. Para continuar, basta ativar a sua conta, por favor use o código de ativação abaixo: </p>
+      <h2><%= activationCode %></h2>
+      <p>Por favor, insira este código na página de ativação nos próximos 5 minutos.</p>
+      <p>Caso você não tenha se registrado na Academia Pensamento Computacional, por favor ignore este email.</p>
+    </div>
+    <div class="email-footer">
+      <p>Se voc~e tiber dúvidas, por favor não hesite e entre em contato <a href="mailto:pcusp_rp@usp.br">suporte@pcusp.com</a></p>
+    </div>
+  </div>
+</body>
+</html>

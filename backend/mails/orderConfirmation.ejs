@@ -1,0 +1,130 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+
+  <title>Confirmação do pedido</title>
+
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+  <style>
+    body {
+      font-family: "Poppins", sans-serif;
+      background-color: #F4F4F4;
+      margin: 0;
+      padding: 0;
+    }
+
+    .container {
+      max-width: 600px;
+      margin: 0 auto;
+      padding: 20px;
+      background: #8C52FF;
+      box-shadow: 0 4px 8px rgba(0,0,0,0.1);
+      color: #FFF;
+    }
+
+    .message-sm {
+      text-align: center;
+      font-size: 18px;
+      margin-bottom: 20px;
+      padding-top: 50px;
+    }
+
+    .message-sm > h1 {
+      font-size: 25px;
+      font-weight: 600;
+    }
+
+    .course-info {
+      margin: auto;
+      padding: 20px;
+      background-color: #FFF;
+      border-radius: 10px;
+      margin-bottom: 20px;
+      box-shadow: 2px 2px 2px rgba(206, 197, 1197, 0.1);
+      color: #000;
+    }
+
+    .course-info > h4 {
+      color: #23BD70;
+      font-size: 22px;
+      font-weight: 500;
+      text-align: center;
+      margin-top: 0 !important;
+    }
+
+    table {
+      width: calc(100% - 20px); /* Ajuste para não exceder a largura do container */
+      margin: auto; /* Centraliza a tabela */
+      border-collapse: collapse; /* Remove espaços entre as células */
+    }
+
+    th, td {
+      padding: 10px; /* Espaçamento interno */
+      text-align: left; /* Alinhamento à esquerda */
+      border-bottom: 1px solid #8C52FF; /* Linha de separação */
+    }
+
+    th {
+      background-color: #f2f2f2; /* Cor de fundo para cabeçalho */
+    }
+
+    .footer {
+      text-align: center;
+      margin-top: 100px;
+      color: #FFF;
+    }
+
+    .footer > p > a {
+      text-decoration: none;
+      color: #FFF; /* Cor do link */
+    }
+  </style>
+</head>
+<body>
+
+<div class="container">
+  <div class="message-sm">
+    <h1>Seu pedido foi confirmado!</h1>
+    <p>E estamos tão animados quanto você.</p>
+  </div>
+
+  <div class="course-info">
+    <h4>Aqui está o seu pedido:</h4>
+    
+    <table>
+      <tr>
+        <td>Pedido #: <% order._id %></td>
+        <td>Data do pedido: <%= order.date %></td>
+      </tr>
+    </table>
+
+    <table>
+      <thead>
+        <tr>
+          <th>Item</th>
+          <th>Quantidade</th>
+        </tr>
+      </thead>
+      <tbody>
+        <tr>
+          <td><%= order.name %></td>
+          <td>1</td>
+        </tr>
+      </tbody>
+    </table>
+
+    <div class="footer">
+      <p>Se você tiver alguma dúvida, entre em contato com nossa equipe de suporte em
+        <a href="mailto:pcusp_rp@usp.br">pcusp_rp@usp.br</a>
+      </p>
+      <p>&copy; 2025 Pensamento Computacional. Todos os direitos reservados.</p>
+    </div>
+  </div>
+</div>
+
+</body>
+</html>
