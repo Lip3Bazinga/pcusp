@@ -1,8 +1,12 @@
 import { useSelector } from "react-redux"
 
-export default function userAuth() {
+export default function useUserAuth() {
+  // Renomeado para useUserAuth
   const { user } = useSelector((state: any) => state.auth)
 
-  if (user) return true
-  else return false
+  if (user) {
+    return true
+  } else {
+    return false
+  }
 }
